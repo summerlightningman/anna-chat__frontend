@@ -1,9 +1,11 @@
+import {FC} from "react";
 import "./login.css";
 
-const Login = () => {
+
+const Login: FC = () => {
     return (
         <div className="login">
-           <h1>Login</h1>
+            <h1>Login</h1>
         </div>
     );
 };

@@ -1,9 +1,9 @@
-import React from 'react';
+import {FC} from 'react';
 
-const Chat = () => {
+const Chat: FC = () => {
     return (
         <div>
-
+            Chat
         </div>
     );
 };
