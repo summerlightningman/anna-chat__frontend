@@ -3,7 +3,7 @@ import {UserAction, userActionTypes, UserState} from "../../types/user";
 
 const initialState: UserState = {
     id: 0,
-    username: ''
+    username: '',
 };
 
 

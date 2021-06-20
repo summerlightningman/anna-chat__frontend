@@ -4,7 +4,7 @@ export enum userActionTypes {
 
 export interface UserState {
     id: number,
-    username: string
+    username: string,
 }
 
 interface SetUserDataAction {
