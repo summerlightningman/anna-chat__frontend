@@ -1,5 +1,6 @@
 export enum userActionTypes {
-    SET_USER_DATA = 'SET_USER_DATA'
+    SET_ID = 'SET_ID',
+    SET_USERNAME = 'SET_USERNAME',
 }
 
 export interface UserState {
@@ -7,9 +8,14 @@ export interface UserState {
     username: string,
 }
 
-interface SetUserDataAction {
-    type: userActionTypes.SET_USER_DATA,
-    payload: UserState
+interface SetIdAction {
+    type: userActionTypes.SET_ID
+    payload: number
 }
 
-export type UserAction = SetUserDataAction;
+interface SetUsernameAction {
+    type: userActionTypes.SET_USERNAME
+    payload: string
+}
+
+export type UserAction = SetIdAction | SetUsernameAction;
