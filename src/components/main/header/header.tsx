@@ -19,8 +19,9 @@ const Header: FC = () => {
         <header className="main-header">
             <div className="main-header-item"></div>
             <div className="main-header-item"></div>
-            <div className="main-header-item">{currUserData.name}
-                <button onClick={handleLogoutClick}>Выход</button>
+            <div className="main-header-item">
+                <span className="main-header-nickname">{currUserData.name}</span>
+                <button className="main-header-button logout-button" onClick={handleLogoutClick}>Выход</button>
             </div>
         </header>
     );

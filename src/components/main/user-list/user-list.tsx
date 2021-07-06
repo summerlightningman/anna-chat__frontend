@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 import './user-list.css';
 
 import UserListItem from "./user-list-item/user-list-item";
-import {getUserList} from "../../../../http";
-import {User} from "../../../../types/user";
+import {getUserList} from "../../../http";
+import {User} from "../../../types/user";
 
 const UserList: FC = () => {
     const [userList, setUserList] = useState<User[]>([]);

@@ -3,16 +3,13 @@ import {useCookies} from "react-cookie";
 import {Redirect} from "react-router-dom";
 
 import Chat from "./chat/chat";
-import UserList from "./chat/user-list/user-list";
-
-import './main.css';
+import UserList from "./user-list/user-list";
 import Header from "./header/header";
 
+import './main.css';
+
 const Main: FC = () => {
-
     const [cookies, ,] = useCookies(['token']);
-
-
 
     if (!('token' in cookies))
         return <Redirect to="/login"/>

@@ -9,8 +9,17 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    padding-left: 10px;
+}
+
+.user-list-item:hover {
+    background: #e6d1e4;
 }
 
 a {
     text-decoration: none;
+}
+
+.user-list-item-active {
+    background: white;
 }
