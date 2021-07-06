@@ -5,7 +5,7 @@ const initialState: LoginState = {
     password: '',
     error: '',
     isLoggedIn: false
-}
+};
 
 export const loginReducer = (state: LoginState = initialState, action: LoginAction): LoginState => {
     switch (action.type) {
@@ -18,6 +18,6 @@ export const loginReducer = (state: LoginState = initialState, action: LoginActi
         case loginActionTypes.SET_IS_LOGGED_IN:
             return {...state, isLoggedIn: action.payload}
         default:
-            return initialState
+            return state
     }
 }

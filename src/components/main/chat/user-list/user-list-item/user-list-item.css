@@ -1,0 +1,16 @@
+.user-list-item {
+    list-style-type: none;
+    text-decoration: none;
+    color: black;
+    width: 99%;
+    background: #ffeafd;
+    height: 35px;
+    border-bottom: 3px solid #d8d5ff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}

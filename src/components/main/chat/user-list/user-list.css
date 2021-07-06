@@ -1,4 +1,10 @@
-.user-list {
+.user-list-container {
     width: 30%;
     background: #babaff;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.user-list {
+    padding: 0;
 }
