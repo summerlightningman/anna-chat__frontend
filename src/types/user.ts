@@ -3,9 +3,16 @@ export enum userActionTypes {
     SET_USERNAME = 'SET_USERNAME',
 }
 
+
+export interface User {
+    id: number,
+    name: string
+}
+
 export interface UserState {
     id: number,
     username: string,
+    userList: User[]
 }
 
 interface SetIdAction {
