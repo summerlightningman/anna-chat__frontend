@@ -1,6 +1,4 @@
-import {Dispatch, FC, useMemo, useState} from 'react';
-import {getProfile} from "../../http";
-import {User} from "../../types/user";
+import {FC} from 'react';
 import {useCookies} from "react-cookie";
 import {Redirect} from "react-router-dom";
 
@@ -8,26 +6,20 @@ import Chat from "./chat/chat";
 import UserList from "./chat/user-list/user-list";
 
 import './main.css';
+import Header from "./header/header";
 
 const Main: FC = () => {
-    const [currUserData, setCurrUserData] = useState<User | Dispatch<User>>({id: 0, name: ''});
+
     const [cookies, ,] = useCookies(['token']);
 
-    useMemo(getProfile, []).then(resp => {
-        const user: User = resp.data;
-        setCurrUserData(user);
-    });
+
 
     if (!('token' in cookies))
         return <Redirect to="/login"/>
 
     return (
         <div className="chat-window">
-            <header className="chat-window-header">
-                <div className="chat-window-header-item">{currUserData.name}
-                    <button>Выход</button>
-                </div>
-            </header>
+            <Header/>
             <main className="chat-main">
                 <UserList/>
                 <Chat/>

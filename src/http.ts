@@ -15,3 +15,5 @@ export const authorize = async (data: FormData) => transport.post(URL + 'login',
 export const getProfile = async () => transport.get(URL + 'profile');
 
 export const getUserList = async () => transport.get(URL + 'user_list');
+
+export const logout = async () => transport.get(URL + 'logout');
