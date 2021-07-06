@@ -4,8 +4,10 @@ import {User} from "../../types/user";
 import {useCookies} from "react-cookie";
 import {Redirect} from "react-router-dom";
 
-import './main.css';
+import Chat from "./chat/chat";
+import UserList from "./chat/user-list/user-list";
 
+import './main.css';
 
 const Main: FC = () => {
     const [currUserData, setCurrUserData] = useState<User | Dispatch<User>>({id: 0, name: ''});
@@ -26,8 +28,9 @@ const Main: FC = () => {
                     <button>Выход</button>
                 </div>
             </header>
-            <main>
-
+            <main className="chat-main">
+                <UserList/>
+                <Chat/>
             </main>
         </div>
     );
