@@ -1,4 +1,4 @@
-.user-list-item {
+.room-list-item {
     list-style-type: none;
     text-decoration: none;
     color: black;
@@ -12,7 +12,7 @@
     padding-left: 10px;
 }
 
-.user-list-item:hover {
+.room-list-item:hover {
     background: #e6d1e4;
 }
 
@@ -20,6 +20,6 @@ a {
     text-decoration: none;
 }
 
-.user-list-item-active {
+.room-list-item-active {
     background: white;
 }

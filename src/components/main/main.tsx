@@ -3,7 +3,7 @@ import {useCookies} from "react-cookie";
 import {Redirect} from "react-router-dom";
 
 import Chat from "./chat/chat";
-import UserList from "./user-list/user-list";
+import RoomList from "./room-list-item/room-list";
 import Header from "./header/header";
 
 import './main.css';
@@ -18,7 +18,7 @@ const Main: FC = () => {
         <div className="chat-window">
             <Header/>
             <main className="chat-main">
-                <UserList/>
+                <RoomList/>
                 <Chat/>
             </main>
         </div>
