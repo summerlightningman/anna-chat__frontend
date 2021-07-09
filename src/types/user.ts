@@ -3,26 +3,28 @@ export enum userActionTypes {
     SET_USERNAME = 'SET_USERNAME',
 }
 
+export type UserID = number;
+export type UserName = string;
 
 export interface User {
-    id: number,
-    name: string
+    id: UserID,
+    name: UserName
 }
 
 export interface UserState {
-    id: number,
-    username: string,
+    id: UserID,
+    username: UserName,
     userList: User[]
 }
 
 interface SetIdAction {
     type: userActionTypes.SET_ID
-    payload: number
+    payload: UserID
 }
 
 interface SetUsernameAction {
     type: userActionTypes.SET_USERNAME
-    payload: string
+    payload: UserName
 }
 
 export type UserAction = SetIdAction | SetUsernameAction;

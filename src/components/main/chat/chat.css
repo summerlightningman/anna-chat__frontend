@@ -2,3 +2,22 @@
     width: 70%;
     background: #f0ffff;
 }
+
+.message-list {
+    height: 94%;
+}
+
+.input-container {
+    height: 5%;
+    padding: 10px 10px;
+}
+
+.message-input {
+    height: 50%;
+    width: calc(100% - 60px);
+}
+
+.btn-send {
+    width: 50px;
+    height: 50%;
+}
