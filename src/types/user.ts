@@ -28,3 +28,4 @@ interface SetUsernameAction {
 }
 
 export type UserAction = SetIdAction | SetUsernameAction;
+export type UserMap = Map<UserID, UserName>;

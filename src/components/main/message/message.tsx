@@ -1,21 +1,20 @@
 import {FC} from 'react';
 import {MessageFromBackend} from "../../../types/message";
-import {UserID} from "../../../types/user";
+import {UserName} from "../../../types/user";
 
 import './message.css';
 
 interface MessageProps {
     message: MessageFromBackend,
-    userId: UserID
+    userName: UserName
 }
 
-const Message: FC<MessageProps> = ({message, userId}) => {
+const Message: FC<MessageProps> = ({message, userName}) => {
     return (
         <div className="message">
-            <span>{message.name}</span>
-            <sub>{message.added}</sub>
-            <span>{message.text}</span>
-            <hr/>
+            <span className="message-name">{userName}</span>
+            <sub className="message-added">{message.added}</sub>
+            <p className="message-text">{message.text}</p>
         </div>
     );
 };

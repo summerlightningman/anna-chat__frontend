@@ -3,27 +3,36 @@ import {useLocation} from 'react-router-dom';
 
 import './chat.css';
 import {chat} from "../../../http";
-import {MessageFromBackend, SendMessageForm, SendMessageType, TextMessage} from "../../../types/message";
+import {MessageFromBackend, SendMessageForm, SendMessageType} from "../../../types/message";
 import Message from "../message/message";
+import {User, UserMap} from "../../../types/user";
+import {ReceiveMessageType, SocketData} from "../../../types/socket";
 
-interface SocketData {
-    type: string,
-    messageList: MessageFromBackend[]
-}
+
+let sock: WebSocket;
 
 const Chat: FC = () => {
     const loc = useLocation();
+
     const [, , roomId] = loc.pathname.split('/');
     const [messageList, setMessageList] = useState<MessageFromBackend[]>([]);
+    const [userList, setUserList] = useState<UserMap>(new Map());
     const [textMessage, setTextMessage] = useState<string>('');
 
-    const sock: WebSocket = chat(roomId);
     useEffect(() => {
-        // const sock: WebSocket = chat(roomId);
+        sock = chat(roomId);
         sock.onmessage = e => {
             const data: SocketData = JSON.parse(e.data);
-            if (data.type === 'load_messages')
-                setMessageList(data.messageList);
+            switch (data.type) {
+                case ReceiveMessageType.MESSAGE_LIST:
+                    setMessageList(data.messageList);
+                    break;
+                case ReceiveMessageType.ONLINE_USER_LIST:
+                    const userMap: UserMap = new Map(data.userList.map((user: User) => [user.id, user.name]));
+                    setUserList(userMap);
+                    break;
+            }
+
         };
         const message: SendMessageForm = {type: SendMessageType.JOIN_ROOM}
         sock.onopen = () => sock.send(JSON.stringify(message));
@@ -32,25 +41,26 @@ const Chat: FC = () => {
             sock.send(JSON.stringify(message));
             sock.close()
         }
-    }, [sock])
+    }, [roomId]);
 
     const handleInput: ChangeEventHandler<HTMLInputElement> = e => setTextMessage(e.target.value);
     const handleReturnPress: KeyboardEventHandler = e => e.key === 'Enter' && handleSubmit();
     const handleSubmit = () => {
         const added = new Date().toISOString().slice(0, 19).replace('T', ' ')
-        const newMessage: TextMessage = {
+        const newMessage: SendMessageForm = {
+            type: SendMessageType.SEND_MESSAGE,
             text: textMessage,
             added
         };
-        sock.send(JSON.stringify(newMessage))
+        sock.send(JSON.stringify(newMessage));
     };
 
     return (
         <div className="chat">
             <div className="message-list">
                 {!roomId && <h1>Выберите комнату для чата</h1>}
-                {messageList.map((message: MessageFromBackend) => <Message message={message} userId={2}
-                                                                           key={message.id}/>)}
+                {messageList.map((message: MessageFromBackend) =>
+                    <Message message={message} userName={userList.get(message.userId) || ''} key={message.id}/>)}
             </div>
             <div className="input-container">
                 <input className="message-input" type="text" value={textMessage} onInput={handleInput}

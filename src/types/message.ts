@@ -1,4 +1,4 @@
-import {UserName} from "./user";
+import {UserID} from "./user";
 
 type MessageID = number;
 type DateTime = string;
@@ -6,7 +6,7 @@ type DateTime = string;
 export enum SendMessageType {
     LEAVE_ROOM = 'leave_room',
     JOIN_ROOM = 'join_room',
-    TEXT_MESSAGE = 'text_message',
+    SEND_MESSAGE = 'send_message',
 }
 
 export interface TextMessage {
@@ -15,7 +15,7 @@ export interface TextMessage {
 }
 
 interface SendTextMessage extends TextMessage {
-    type: SendMessageType.TEXT_MESSAGE,
+    type: SendMessageType.SEND_MESSAGE,
 }
 
 interface JoinRoomMessage {
@@ -27,7 +27,7 @@ interface LeaveRoomMessage {
 }
 
 export interface MessageFromBackend extends TextMessage {
-    name: UserName
+    userId: UserID
     id: MessageID,
 }
 

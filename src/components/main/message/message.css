@@ -1,0 +1,10 @@
+.message {
+    width: 100%;
+    padding: 20px;
+}
+
+.message-text {
+    display: block;
+    width: 100%;
+    word-break: break-all;
+}
