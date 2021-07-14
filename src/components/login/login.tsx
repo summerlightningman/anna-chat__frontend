@@ -10,9 +10,9 @@ import {useCookies} from "react-cookie";
 
 const Login: FC = () => {
     const {login, password, error, isLoggedIn} = useTypedSelector(state => state.login);
-    const [cookies,,] = useCookies(['token']);
+    const [cookies, ,] = useCookies(['token']);
     const dispatch = useDispatch();
-    
+
     if ('token' in cookies && !isLoggedIn)
         dispatch({type: loginActionTypes.SET_IS_LOGGED_IN, payload: true})
 
@@ -27,6 +27,8 @@ const Login: FC = () => {
 
     const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
         e.preventDefault();
+        if (!login && !password)
+            return
         const form = new FormData();
         form.append('login', login);
         form.append('password', password);
@@ -40,11 +42,16 @@ const Login: FC = () => {
         <div className="login">
             <h1 className="page-header">Вход</h1>
             <form>
-                <label htmlFor="login">Логин</label>
-                <input type="text" id="login" name="login" value={login} onInput={handleLoginInput}/>
-                <label htmlFor="password">Пароль</label>
-                <input type="password" id="password" name="password" value={password} onInput={handlePasswordInput}/>
-                <button onClick={handleClick}>Отправить</button>
+                <div className="form-field">
+                    <label htmlFor="login" className="form-label">Логин</label>
+                    <input type="text" className="form-input" id="login" name="login" value={login}
+                           onInput={handleLoginInput}/></div>
+                <div className="form-field">
+                    <label htmlFor="password" className="form-label">Пароль</label>
+                    <input type="password" className="form-input" id="password" name="password" value={password}
+                           onInput={handlePasswordInput}/>
+                </div>
+                <button onClick={handleClick} className="form-submit">Отправить</button>
                 {error && <span className="error">{error}</span>}
             </form>
         </div>

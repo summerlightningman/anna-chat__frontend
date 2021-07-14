@@ -1,7 +1,6 @@
 import axios from "axios";
 import {IAxiosConfig} from "./types/http";
 
-
 const URL = 'http://localhost:8080/';
 
 const axiosConfig: IAxiosConfig = {

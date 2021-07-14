@@ -6,7 +6,7 @@ type DateTime = string;
 export enum SendMessageType {
     LEAVE_ROOM = 'leave_room',
     JOIN_ROOM = 'join_room',
-    SEND_MESSAGE = 'send_message',
+    SEND_TEXT_MESSAGE = 'send_message',
 }
 
 export interface TextMessage {
@@ -15,7 +15,7 @@ export interface TextMessage {
 }
 
 interface SendTextMessage extends TextMessage {
-    type: SendMessageType.SEND_MESSAGE,
+    type: SendMessageType.SEND_TEXT_MESSAGE,
 }
 
 interface JoinRoomMessage {

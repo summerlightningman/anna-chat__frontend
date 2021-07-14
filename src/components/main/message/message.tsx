@@ -12,9 +12,10 @@ interface MessageProps {
 const Message: FC<MessageProps> = ({message, userName}) => {
     return (
         <div className="message">
-            <span className="message-name">{userName}</span>
-            <sub className="message-added">{message.added}</sub>
-            <p className="message-text">{message.text}</p>
+            <div className="message-data">
+                <span className="message-name">{userName}</span>
+                <span className="message-added">{message.added}</span></div>
+            <span className="message-text">{message.text}</span>
         </div>
     );
 };
