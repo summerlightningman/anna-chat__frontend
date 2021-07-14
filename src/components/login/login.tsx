@@ -29,7 +29,7 @@ const Login: FC = () => {
     const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
         e.preventDefault();
         if (!login && !password)
-            dispatch({type: loginActionTypes.SET_ERROR, payload: 'Имеются незаполненные поля'})
+            dispatch({type: loginActionTypes.SET_ERROR, payload: 'Имеются незаполненные поля'});
         const form = new FormData();
         form.append('login', login);
         form.append('password', password);
