@@ -17,6 +17,8 @@ export const loginReducer = (state: LoginState = initialState, action: LoginActi
             return {...state, error: action.payload}
         case loginActionTypes.SET_IS_LOGGED_IN:
             return {...state, error: '', isLoggedIn: action.payload}
+        case loginActionTypes.RESET_ALL_FIELDS:
+            return {...state, error: '', login: '', password: '',}
         default:
             return state
     }

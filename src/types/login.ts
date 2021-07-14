@@ -2,7 +2,8 @@ export enum loginActionTypes {
     SET_LOGIN = 'SET_LOGIN',
     SET_PASSWORD = 'SET_PASSWORD',
     SET_ERROR = 'SET_ERROR',
-    SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN'
+    SET_IS_LOGGED_IN = 'SET_IS_LOGGED_IN',
+    RESET_ALL_FIELDS = 'RESET_ALL_FIELDS'
 }
 
 export interface LoginState {
@@ -32,4 +33,8 @@ interface SetIsLoggedInAction {
     payload: boolean
 }
 
-export type LoginAction = SetLoginAction | SetPasswordAction | SetErrorAction | SetIsLoggedInAction
+interface ResetAllFields {
+    type: loginActionTypes.RESET_ALL_FIELDS
+}
+
+export type LoginAction = SetLoginAction | SetPasswordAction | SetErrorAction | SetIsLoggedInAction | ResetAllFields

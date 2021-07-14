@@ -18,8 +18,6 @@ const RoomList: FC = () => {
         getRoomList().then(({data}) => dispatch({type: chatActionTypes.SET_ROOM_LIST, payload: data.roomList}));
     }, [dispatch]);
 
-    console.log(roomList);
-
     return <div className="user-list-container">
         <ul className="user-list">
             {roomList.map((room: Room) =>

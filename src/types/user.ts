@@ -14,7 +14,6 @@ export interface User {
 export interface UserState {
     id: UserID,
     username: UserName,
-    userList: User[]
 }
 
 interface SetIdAction {

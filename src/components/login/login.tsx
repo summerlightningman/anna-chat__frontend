@@ -34,7 +34,10 @@ const Login: FC = () => {
         form.append('login', login);
         form.append('password', password);
         authorize(form).then(
-            () => dispatch({type: loginActionTypes.SET_IS_LOGGED_IN, payload: true}),
+            () => {
+                dispatch({type: loginActionTypes.RESET_ALL_FIELDS});
+                dispatch({type: loginActionTypes.SET_IS_LOGGED_IN, payload: true});
+            },
             err => dispatch({type: loginActionTypes.SET_ERROR, payload: err.response.data.text})
         );
     };
