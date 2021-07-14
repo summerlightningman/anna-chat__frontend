@@ -1,11 +1,14 @@
 import {User} from "./user";
+import {Room} from "./room";
 
 export enum chatActionTypes {
-    SET_USER_LIST = 'SET_USER_LIST'
+    SET_USER_LIST = 'SET_USER_LIST',
+    SET_ROOM_LIST = 'SET_ROOM_LIST'
 }
 
 export interface ChatState {
-    userList: User[]
+    userList: User[],
+    roomList: Room[]
 }
 
 interface SetUserListAction {
@@ -13,4 +16,9 @@ interface SetUserListAction {
     payload: User[]
 }
 
-export type ChatAction = SetUserListAction
+interface SetRoomListAction {
+    type: chatActionTypes.SET_ROOM_LIST,
+    payload: Room[]
+}
+
+export type ChatAction = SetUserListAction | SetRoomListAction

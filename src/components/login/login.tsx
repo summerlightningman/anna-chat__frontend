@@ -10,6 +10,7 @@ import {useCookies} from "react-cookie";
 
 const Login: FC = () => {
     const {login, password, error, isLoggedIn} = useTypedSelector(state => state.login);
+
     const [cookies, ,] = useCookies(['token']);
     const dispatch = useDispatch();
 
@@ -28,13 +29,13 @@ const Login: FC = () => {
     const handleClick: MouseEventHandler<HTMLButtonElement> = e => {
         e.preventDefault();
         if (!login && !password)
-            return
+            dispatch({type: loginActionTypes.SET_ERROR, payload: 'Имеются незаполненные поля'})
         const form = new FormData();
         form.append('login', login);
         form.append('password', password);
         authorize(form).then(
-            ({data}) => data.code === 200 && dispatch({type: loginActionTypes.SET_IS_LOGGED_IN, payload: true}),
-            err => console.log(err)
+            () => dispatch({type: loginActionTypes.SET_IS_LOGGED_IN, payload: true}),
+            err => dispatch({type: loginActionTypes.SET_ERROR, payload: err.response.data.text})
         );
     };
 
@@ -51,8 +52,8 @@ const Login: FC = () => {
                     <input type="password" className="form-input" id="password" name="password" value={password}
                            onInput={handlePasswordInput}/>
                 </div>
-                <button onClick={handleClick} className="form-submit">Отправить</button>
                 {error && <span className="error">{error}</span>}
+                <button onClick={handleClick} className="form-submit">Отправить</button>
             </form>
         </div>
     );
