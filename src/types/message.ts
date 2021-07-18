@@ -1,34 +1,14 @@
-import {UserID} from "./user";
+import firebase from "firebase";
 
-type MessageID = number;
-type DateTime = string;
-
-export enum SendMessageType {
-    LEAVE_ROOM = 'leave_room',
-    JOIN_ROOM = 'join_room',
-    SEND_TEXT_MESSAGE = 'send_message',
+interface Timestamp {
+    seconds: number,
+    nanoseconds: number,
 }
 
 export interface TextMessage {
     text: string,
-    added: DateTime
+    added?: firebase.firestore.FieldValue | Timestamp | null,
+    userID?: string | null,
+    userName?: string | null,
+    photoURL?: string | null,
 }
-
-interface SendTextMessage extends TextMessage {
-    type: SendMessageType.SEND_TEXT_MESSAGE,
-}
-
-interface JoinRoomMessage {
-    type: SendMessageType.JOIN_ROOM
-}
-
-interface LeaveRoomMessage {
-    type: SendMessageType.LEAVE_ROOM
-}
-
-export interface MessageFromBackend extends TextMessage {
-    userId: UserID
-    id: MessageID,
-}
-
-export type SendMessageForm = SendTextMessage | JoinRoomMessage | LeaveRoomMessage;

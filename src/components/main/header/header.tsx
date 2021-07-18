@@ -1,34 +1,22 @@
-import {FC, MouseEventHandler, useEffect} from 'react';
-import {userActionTypes} from "../../../types/user";
-import {getProfile, logout} from "../../../http";
+import {FC, useContext} from 'react';
 
 import './header.css';
-import {useDispatch} from "react-redux";
-import {useTypedSelector} from "../../../hooks/useTypedSelector";
+
+import {Context} from "../../../index";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 const Header: FC = () => {
-    const dispatch = useDispatch();
-    const {username} = useTypedSelector(state => state.user);
-
-    useEffect(() => {
-        getProfile().then(resp => {
-            console.log(resp.data)
-            dispatch({type: userActionTypes.SET_USERNAME, payload: resp.data.name});
-            dispatch({type: userActionTypes.SET_ID, payload: resp.data.id});
-        })
-    }, [dispatch]);
-
-
-    const handleLogoutClick: MouseEventHandler<HTMLButtonElement> = () =>
-        logout().then(() => window.location.href = '/login');
+    const {auth} = useContext(Context);
+    const [user] = useAuthState(auth);
+    const handleClick = () => auth.signOut();
 
     return (
         <header className="main-header">
             <div className="main-header-item">{}</div>
             <div className="main-header-item">{}</div>
             <div className="main-header-item">
-                <span className="main-header-nickname">{username}</span>
-                <button className="main-header-button logout-button" onClick={handleLogoutClick}>Выход</button>
+                <span className="main-header-nickname">{user?.displayName}</span>
+                <button className="main-header-button logout-button" onClick={handleClick}>Выход</button>
             </div>
         </header>
     );

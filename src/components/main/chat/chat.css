@@ -1,5 +1,5 @@
 .chat {
-    width: 70%;
+    width: 100%;
 }
 
 .message-list {
@@ -7,6 +7,11 @@
     overflow-y: auto;
     padding: 0 15px 15px 15px;
     background-color: #a1d6fb;
+
+    display: flex;
+    flex-direction: column;
+    /*justify-content: flex-start;*/
+    /*align-items: flex-start;*/
 }
 
 .input-container {
