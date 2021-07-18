@@ -48,3 +48,8 @@
     color: #0008;
 }
 
+@media (max-device-width: 500px) {
+    .message {
+        width: 90%;
+    }
+}

@@ -10,3 +10,11 @@
     height: 90%;
     display: flex;
 }
+
+@media (max-device-width: 800px){
+    .chat-window {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+}
