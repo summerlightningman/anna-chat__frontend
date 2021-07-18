@@ -17,14 +17,20 @@ const Message: FC<MessageProps> = ({message}) => {
     const added = message.added.toDate().toLocaleString();
 
     const className = 'message ' + (message.userID === user?.uid ? 'right' : 'left');
+    // TypeScript заебал капризничать. Всё ему не то, блять...
+    const avatar = message.photoURL ? <img className="avatar" src={message.photoURL} alt=""/> :
+        <img className="avatar" alt=""/>;
 
     return (
         <div className={className}>
-            <div className="message-data">
-                <span className="message-name">{message.userName}</span>
-                <span className="message-added">{added}</span>
+            {avatar}
+            <div className="message-text-data">
+                <div className="message-data">
+                    <span className="message-name">{message.userName}</span>
+                    <span className="message-added">{added}</span>
+                </div>
+                <span className="message-text">{message.text}</span>
             </div>
-            <span className="message-text">{message.text}</span>
         </div>
     );
 };
