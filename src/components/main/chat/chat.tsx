@@ -1,4 +1,4 @@
-import {ChangeEventHandler, FC, KeyboardEventHandler, useContext, useState} from 'react';
+import {ChangeEventHandler, FC, KeyboardEventHandler, useContext, useRef, useState} from 'react';
 
 import firebase from "firebase/app";
 import {useAuthState} from "react-firebase-hooks/auth";
@@ -20,6 +20,7 @@ const Chat: FC = () => {
     const [user] = useAuthState(auth);
     const [messageText, setMessageText] = useState<string>('');
 
+    const messageListRef = useRef<HTMLDivElement>(null);
     if (loading) return <Loading/>
     if (!user || !whiteList.includes(user.uid)) return <Redirect to="/login"/>
 
@@ -30,8 +31,8 @@ const Chat: FC = () => {
     const sendMessage = async () => {
         const text = messageText.trim();
         setMessageText('');
-        if (!text)
-            return
+        if (!text) return
+
         const newMessage: TextMessage = {
             userID: user?.uid,
             text: messageText,
@@ -40,7 +41,6 @@ const Chat: FC = () => {
             photoURL: user?.photoURL,
         };
         await firestore.collection('messages').add(newMessage);
-
     };
 
     const handleKeyPress: KeyboardEventHandler<HTMLInputElement> = async e => e.key === 'Enter' && await sendMessage();
@@ -48,9 +48,12 @@ const Chat: FC = () => {
     const messages = messageList?.map((message, idx) => // @ts-ignore
         <Message key={idx} message={message}/>)
 
+    if (messageListRef.current)
+        messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
+
     return (
         <div className="chat">
-            <div className="message-list" >
+            <div className="message-list" ref={messageListRef}>
                 {messages}
             </div>
             <div className="input-container">
