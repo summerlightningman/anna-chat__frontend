@@ -1,5 +1,9 @@
+import {FC} from 'react'
+
 import './loading.css';
 
-const Loading = () => <div className="lds-hourglass"> </div>;
+const Loading: FC = () => {
+    return <div className="lds-hourglass"> </div>;
+}
 
 export default Loading;
