@@ -1,8 +1,10 @@
 import {FC, useContext} from "react";
 import {useHistory} from "react-router-dom";
-import "./login.css";
+
 import {Context} from "../../index";
 import firebase from "firebase";
+
+import "./login.css";
 
 const Login: FC = () => {
     const {auth} = useContext(Context);
