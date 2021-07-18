@@ -34,7 +34,7 @@ const Chat: FC = () => {
     const handleKeyPress: KeyboardEventHandler<HTMLInputElement> = async e => e.key === 'Enter' && await sendMessage();
     // @ts-ignore
     const messages = messageList?.map(message => <Message message={message}/>)
-    console.log(messageList);
+
     return (
         <div className="chat">
             <div className="message-list">
