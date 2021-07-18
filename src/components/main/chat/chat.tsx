@@ -19,8 +19,11 @@ const Chat: FC = () => {
     );
     const [user] = useAuthState(auth);
     const [messageText, setMessageText] = useState<string>('');
+
     if (loading) return <Loading/>
     if (!user || !whiteList.includes(user.uid)) return <Redirect to="/login"/>
+
+
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = e => setMessageText(e.target.value);
 
@@ -47,7 +50,7 @@ const Chat: FC = () => {
 
     return (
         <div className="chat">
-            <div className="message-list">
+            <div className="message-list" >
                 {messages}
             </div>
             <div className="input-container">
