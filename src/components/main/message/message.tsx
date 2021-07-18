@@ -11,10 +11,11 @@ interface MessageProps {
 }
 
 const Message: FC<MessageProps> = ({message}) => {
+    console.log(message);
     const {auth} = useContext(Context);
     const [user] = useAuthState(auth);
     // @ts-ignore
-    const added = message.added.toDate().toLocaleString();
+    const added = message.added && message.added.toDate().toLocaleString();
 
     const className = 'message ' + (message.userID === user?.uid ? 'right' : 'left');
     // TypeScript заебал капризничать. Всё ему не то, блять...

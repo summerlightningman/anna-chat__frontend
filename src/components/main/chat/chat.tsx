@@ -17,12 +17,15 @@ const Chat: FC = () => {
     );
     const [user] = useAuthState(auth);
     const [messageText, setMessageText] = useState<string>('');
-
     if (loading) return <Loading/>
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = e => setMessageText(e.target.value);
 
     const sendMessage = async () => {
+        const text = messageText.trim();
+        setMessageText('');
+        if (!text)
+            return
         const newMessage: TextMessage = {
             userID: user?.uid,
             text: messageText,
@@ -31,12 +34,13 @@ const Chat: FC = () => {
             photoURL: user?.photoURL,
         };
         await firestore.collection('messages').add(newMessage);
-        setMessageText('');
+
     };
 
     const handleKeyPress: KeyboardEventHandler<HTMLInputElement> = async e => e.key === 'Enter' && await sendMessage();
-    // @ts-ignore
-    const messages = messageList?.map(message => <Message key={message.added.nanoseconds} message={message}/>)
+
+    const messages = messageList?.map((message, idx) => // @ts-ignore
+        <Message key={idx} message={message}/>)
 
     return (
         <div className="chat">
