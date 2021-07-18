@@ -2,6 +2,7 @@ import {FC, useContext} from "react";
 import {useHistory} from "react-router-dom";
 
 import {Context} from "../../index";
+import {whiteList} from "../../whitelist";
 import firebase from "firebase";
 
 import "./login.css";
@@ -12,7 +13,8 @@ const Login: FC = () => {
 
     const handleClick = async () => {
         const provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).then(({user}) => user && history.push('/main/'));
+        auth.signInWithPopup(provider).then(({user}) =>
+            user && whiteList.includes(user.uid) && history.push('/main/'));
     }
 
     return (

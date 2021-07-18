@@ -8,12 +8,13 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {Redirect} from "react-router-dom";
 
 import './main.css';
+import {whiteList} from "../../whitelist";
 
 const Main: FC = () => {
     const {auth} = useContext(Context);
     const [user] = useAuthState(auth);
 
-    if (!user)
+    if (!user || !whiteList.includes(user.uid))
         return <Redirect to="/login"/>
 
     return (

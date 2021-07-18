@@ -1,0 +1,1 @@
+export const whiteList = ['bcGBf1cIPANosrfO939JhUld3iY2', '2bDnxiJxvFZMPGlbMd7I597QibQ2'];

@@ -9,6 +9,8 @@ import {TextMessage} from "../../../types/message";
 import Message from "../message/message";
 import './chat.css';
 import Loading from "../loading/loading";
+import {whiteList} from "../../../whitelist";
+import {Redirect} from "react-router-dom";
 
 const Chat: FC = () => {
     const {auth, firestore} = useContext(Context);
@@ -18,6 +20,7 @@ const Chat: FC = () => {
     const [user] = useAuthState(auth);
     const [messageText, setMessageText] = useState<string>('');
     if (loading) return <Loading/>
+    if (!user || !whiteList.includes(user.uid)) return <Redirect to="/login"/>
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = e => setMessageText(e.target.value);
 
